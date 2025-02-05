@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Auth from './pages/Auth'
 import About from './pages/About'
-
+import './index.css'; 
 function App() {
   return (
     <Router>

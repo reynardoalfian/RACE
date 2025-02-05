@@ -4,9 +4,56 @@
 
 /* Custom styles below */
 @layer components {
-  /* Your custom component styles */
+  /* Navbar styling */
+  .navbar {
+    @apply bg-white shadow-md py-4 px-6;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors;
+  }
+
+  /* Form input styles */
+  .input-field {
+    @apply border rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600;
+  }
+
+  /* Custom card styles for Projects */
+  .project-card {
+    @apply bg-white shadow-lg rounded-lg p-4 mb-4;
+  }
+
+  /* Custom project list styles */
+  .project-list {
+    @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Centering the main content */
+  .main-container {
+    @apply container mx-auto px-4 py-8;
+  }
+
+  /* Custom team section styles */
+  .team-section {
+    @apply flex flex-wrap justify-center gap-4;
+  }
+
+  /* Team member card styling */
+  .team-member {
+    @apply flex flex-col items-center text-center w-40;
+  }
+
+  /* Hero section styling (e.g., for Welcome page) */
+  .hero-section {
+    @apply text-center py-16 px-4 bg-gray-100;
+  }
 }
 
 @layer utilities {
-  /* Your custom utility styles */
+  /* Custom utility classes can be added here */
 }
