@@ -6,7 +6,7 @@ const About = () => {
       <div className="bg-white rounded-lg shadow-sm p-6">
         <p className="text-gray-600 mb-4">
           R.A.C.E (Race Walking Analysis & Compliance Evaluation) is a platform
-          designed to help analyze race walking technique using advanced AI.
+          designed to help analyze race walking technique.
         </p>
         <p className="text-gray-600 mb-4">
           Our system uses computer vision and machine learning to detect and analyze
