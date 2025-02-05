@@ -8,11 +8,13 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
 
+    /* Project references */
+    "composite": true,  // Add this line to enable composite projects
+    "noEmit": false,    // Change this to false to allow emitting output
+    
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
