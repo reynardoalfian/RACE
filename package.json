@@ -4,11 +4,13 @@
     "datatables.net": "^2.2.2",
     "datatables.net-dt": "^2.2.2",
     "datatables.net-responsive": "^3.0.4",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
     "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3"
+    "@types/react-dom": "^19.0.3",
+    "@types/react-icons": "^2.2.7"
   }
 }

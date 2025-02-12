@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Auth from './pages/Auth';
 import About from './pages/About';
+import Profile from "./pages/Profile";
 import './index.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
     </div>
