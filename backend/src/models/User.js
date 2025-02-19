@@ -30,4 +30,4 @@ const User = sequelize.define("User", {
 
 // Sync database & create tables if they don’t exist
 sequelize.sync()
-    .then(() => console.log("✅ Database &
+    .then(() => console.log("✅ Database &) tables created"))
