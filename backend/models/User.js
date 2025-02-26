@@ -1,9 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: "./database.sqlite",
-    logging: false
-});
+const bcrypt = require("bcryptjs");
+const sequelize = require("../config/database");
 
 const User = sequelize.define("User", {
     email: {
@@ -25,8 +22,32 @@ const User = sequelize.define("User", {
     }
 });
 
+const createDefaultAdmin = async () => {
+    try {
+        const adminExists = await User.findOne({ where: { role: "admin" } });
+        if (!adminExists) {
+            const hashedPassword = await bcrypt.hash("Admin1234", 10);
+            await User.create({
+                email: "admin@example.com",
+                password: hashedPassword,
+                isApproved: true,
+                role: "admin"
+            });
+            console.log("Default admin account created: admin@example.com");
+        } else {
+            console.log("ℹ️ Admin account already exists.");
+        }
+    } catch (error) {
+        console.error("Error creating admin account:", error);
+    }
+};
+
+// Sync database & create default admin
 sequelize.sync()
-    .then(() => console.log("Database & tables created!"))
-    .catch((err) => console.error("Error syncing database:", err));
+    .then(() => {
+        console.log("✅ Database & User table initialized");
+        createDefaultAdmin(); //Automatically create admin
+    })
+    .catch((err) => console.error("Database Sync Error:", err));
 
 module.exports = User;

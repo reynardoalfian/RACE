@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
-const sequelize = require("../config/database");
+const sequelize = require("/config/database");
 
 const User = sequelize.define("User", {
     email: {
@@ -14,20 +14,41 @@ const User = sequelize.define("User", {
     },
     isApproved: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false // User needs admin approval
+        defaultValue: false
     },
     role: {
         type: DataTypes.STRING,
-        defaultValue: "user" // Default role
-    }
-}, {
-    hooks: {
-        beforeCreate: async (user) => {
-            user.password = await bcrypt.hash(user.password, 10); // Hash password before saving
-        }
+        defaultValue: "user"
     }
 });
 
-// Sync database & create tables if they don’t exist
+// Function to create default admin if it doesn't exist
+const createDefaultAdmin = async () => {
+    try {
+        const adminExists = await User.findOne({ where: { role: "admin" } });
+        if (!adminExists) {
+            const hashedPassword = await bcrypt.hash("Admin1234", 10);
+            await User.create({
+                email: "admin@example.com",
+                password: hashedPassword,
+                isApproved: true,
+                role: "admin"
+            });
+            console.log("Default admin account created: admin@example.com");
+        } else {
+            console.log("ℹ️ Admin account already exists.");
+        }
+    } catch (error) {
+        console.error("Error creating admin account:", error);
+    }
+};
+
+// Sync database & create default admin
 sequelize.sync()
-    .then(() => console.log("✅ Database &) tables created"))
+    .then(() => {
+        console.log("✅ Database & User table initialized");
+        createDefaultAdmin(); //Automatically create admin
+    })
+    .catch((err) => console.error("Database Sync Error:", err));
+
+module.exports = User;

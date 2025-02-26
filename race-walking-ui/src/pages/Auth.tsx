@@ -4,8 +4,8 @@ export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState(""); // ✅ Store response messages
-  const [loading, setLoading] = useState(false); // ✅ Show loading state
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,9 +26,13 @@ export default function Auth() {
       if (!response.ok) throw new Error(data.message || "Something went wrong");
 
       setMessage(data.message);
+
       if (isLogin) {
-        // ✅ Store JWT token for logged-in users
+        // ✅ Store user data in local storage
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        window.location.href = "/profile"; // Redirect to profile page
       }
     } catch (error: any) {
       setMessage(error.message);
@@ -63,7 +67,7 @@ export default function Auth() {
           {isLogin ? "Login" : "Register"}
         </h2>
 
-        {message && <p className="text-center text-red-500">{message}</p>} {/* ✅ Show errors/messages */}
+        {message && <p className="text-center text-red-500">{message}</p>}
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -94,15 +98,6 @@ export default function Auth() {
             {loading ? "Processing..." : isLogin ? "Login" : "Register"}
           </button>
         </form>
-
-        <div className="text-center mt-4">
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-sm text-blue-600 hover:underline"
-          >
-            {isLogin ? "Need an account? Register" : "Already have an account? Login"}
-          </button>
-        </div>
       </div>
     </div>
   );
